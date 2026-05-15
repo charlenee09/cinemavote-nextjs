@@ -42,9 +42,13 @@ export default function RankingPage() {
         >
           <option value="All">GENRE ▼</option>
           <option value="Action">Action</option>
+          <option value="Crime">Crime</option>
           <option value="Sci-Fi">Sci-Fi</option>
           <option value="Comedy">Comedy</option>
           <option value="Drama">Drama</option>
+          <option value="Horor">Horor</option>
+          <option value="Romance">Romance</option>
+          <option value="Thiller">Thiller</option>
         </select>
       </div>
 

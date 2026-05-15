@@ -42,11 +42,15 @@ export default function HomePage() {
             onChange={(e) => setSelectedGenre(e.target.value)}
             className="appearance-none bg-black border border-gray-600 rounded-full px-5 py-1.5 text-[11px] font-bold tracking-widest text-white outline-none cursor-pointer hover:border-white transition uppercase" 
           >
-            <option value="All">GENRE ▼</option>
-            <option value="Action">Action</option>
-            <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Drama">Drama</option>
+          <option value="All">GENRE ▼</option>
+          <option value="Action">Action</option>
+          <option value="Crime">Crime</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Drama">Drama</option>
+          <option value="Horor">Horor</option>
+          <option value="Romance">Romance</option>
+          <option value="Thiller">Thiller</option>
           </select>
         </div>
 
@@ -57,10 +61,16 @@ export default function HomePage() {
             onChange={(e) => setSelectedRating(e.target.value)}
             className="appearance-none bg-black border border-gray-600 rounded-full px-5 py-1.5 text-[11px] font-bold tracking-widest text-white outline-none cursor-pointer hover:border-white transition uppercase"
           >
-            <option value="0">RATING ▼</option>
-            <option value="9">9.0+ STAR</option>
-            <option value="8">8.0+ STAR</option>
-            <option value="7">7.0+ STAR</option>
+          <option value="0">RATING ▼</option>
+          <option value="9">9.0+</option>
+          <option value="8">8.0+</option>
+          <option value="7">7.0+</option>
+          <option value="6">6.0+</option>
+          <option value="5">5.0+</option>
+          <option value="4">4.0+</option>
+          <option value="3">3.0+</option>
+          <option value="2">2.0+</option>
+          <option value="1">1.0+</option>
           </select>
         </div>
       </div>

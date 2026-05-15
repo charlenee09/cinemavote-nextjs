@@ -181,117 +181,168 @@ export default function Navbar({ searchTerm, setSearchTerm }) {
           )}
         </div>
 
-        {/* PROFILE */}
-        <div className="relative flex items-center border-l border-gray-700 pl-6">
+{/* PROFILE */}
+<div className="relative flex items-center border-l border-gray-700 pl-6">
 
-          {!isLoggedIn ? (
+  {!isLoggedIn ? (
+    // DI SINI KITA KEMBALIKAN TOMBOL SIGN-IN DAN SIGN-UP BIAR BERJALAN BERSAMAAN
+    <div className="flex items-center space-x-6 pr-4">
+      <button
+        onClick={() => {
+          setIsLoginView(true); // Pastikan modal yang terbuka versinya Sign In
+          setShowLoginForm(true);
+        }}
+        className="text-sm font-bold text-gray-300 hover:text-white transition cursor-pointer"
+      >
+        Sign-in
+      </button>
+      
+      <button
+        onClick={() => {
+          setIsLoginView(false); // Pastikan modal yang terbuka versinya Sign Up
+          setShowLoginForm(true);
+        }}
+        className="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-4 py-2 rounded transition cursor-pointer shadow-md"
+      >
+        Sign-up
+      </button>
+    </div>
 
-            <button
-              onClick={() => setShowLoginForm(true)}
-              className="text-sm font-medium hover:text-red-600 transition"
-            >
-              Sign-in
-            </button>
+  ) : (
 
-          ) : (
-
-            <div className="relative">
-
-              <button
-                onClick={() => setShowProfile(!showProfile)}
-                className="flex items-center space-x-2 group"
-              >
-
-                <div className="w-8 h-8 rounded-sm overflow-hidden border border-gray-700">
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
-                    alt="Profile"
-                  />
-                </div>
-
-                <span className="text-[12px] font-bold group-hover:text-white transition">
-                  {userData.username}
-                </span>
-
-              </button>
-
-              {showProfile && (
-                <div className="absolute right-0 top-10 w-48 bg-black border border-gray-800 py-2 z-[1000] shadow-2xl text-white">
-
-                  <Link
-                    href="/kelola-profil"
-                    onClick={() => setShowProfile(false)}
-                    className="block w-full text-left px-4 py-2 text-[11px] hover:underline"
-                  >
-                    ✏️ Kelola Profil
-                  </Link>
-
-                  <button
-                    onClick={() => {
-                      setIsLoggedIn(false);
-                      localStorage.removeItem('userTercatat');
-                    }}
-                    className="w-full text-left px-4 py-2 text-[11px] text-red-500 hover:underline"
-                  >
-                    Keluar
-                  </button>
-
-                </div>
-              )}
-
-            </div>
-          )}
+    <div className="relative">
+      <button
+        onClick={() => setShowProfile(!showProfile)}
+        className="flex items-center space-x-2 group"
+      >
+        <div className="w-8 h-8 rounded-sm overflow-hidden border border-gray-700">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+            alt="Profile"
+          />
         </div>
-      </div>
+        <span className="text-[12px] font-bold group-hover:text-white transition">
+          {userData.username}
+        </span>
+      </button>
 
-      {/* MODAL LOGIN */}
-      {showLoginForm && (
-        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-[9999]">
-
-          <div className="bg-[#141414] p-10 rounded-md w-96 border border-gray-800 relative shadow-2xl">
-
-            <h2 className="text-3xl font-bold mb-6 text-white">
-              {isLoginView ? "Sign In" : "Sign Up"}
-            </h2>
-
-            <input
-              type="text"
-              placeholder="Email"
-              value={userData.email}
-              onChange={(e) =>
-                setUserData({
-                  ...userData,
-                  email: e.target.value
-                })
-              }
-              className="w-full p-3 mb-4 bg-[#333] rounded text-white outline-none border border-transparent focus:border-red-600"
-            />
-
-            <button
-              onClick={() => {
-                setIsLoggedIn(true);
-                setShowLoginForm(false);
-
-                localStorage.setItem(
-                  'userTercatat',
-                  JSON.stringify(userData)
-                );
-              }}
-              className="w-full bg-red-600 py-3 rounded font-bold hover:bg-red-700 transition uppercase"
-            >
-              {isLoginView ? "Masuk" : "Daftar"}
-            </button>
-
-            <button
-              onClick={() => setShowLoginForm(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-white"
-            >
-              ✕
-            </button>
-
-          </div>
+      {showProfile && (
+        <div className="absolute right-0 top-10 w-48 bg-black border border-gray-800 py-2 z-[1000] shadow-2xl text-white">
+          <Link
+            href="/kelola-profil"
+            onClick={() => setShowProfile(false)}
+            className="block w-full text-left px-4 py-2 text-[11px] hover:underline"
+          >
+            ✏️ Kelola Profil
+          </Link>
+          <button
+            onClick={() => {
+              setIsLoggedIn(false);
+              localStorage.removeItem('userTercatat');
+            }}
+            className="w-full text-left px-4 py-2 text-[11px] text-red-500 hover:underline"
+          >
+            Keluar
+          </button>
         </div>
       )}
+    </div>
+  )}
+</div>
+      </div>
+
+{/* MODAL LOGIN & SIGN UP */}
+{showLoginForm && (
+  <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-[9999]">
+    <div className="bg-[#141414] p-10 rounded-md w-96 border border-gray-800 relative shadow-2xl transition-all duration-300">
+
+      <button
+        onClick={() => setShowLoginForm(false)}
+        className="absolute top-4 right-4 text-gray-500 hover:text-white transition cursor-pointer text-sm"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-3xl font-bold mb-6 text-white tracking-tight">
+        {isLoginView ? "Sign In" : "Sign Up"}
+      </h2>
+
+      {/* 1. INPUT USERNAME (Cuma muncul pas Sign Up) */}
+      {!isLoginView && (
+        <div className="mb-4">
+          <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Nama Lengkap</label>
+          <input
+            type="text"
+            placeholder="Masukkan nama lengkap..."
+            value={userData.username}
+            onChange={(e) => setUserData({ ...userData, username: e.target.value })}
+            className="w-full p-3 bg-[#333] rounded text-white text-sm outline-none border border-transparent focus:border-red-600 transition"
+          />
+        </div>
+      )}
+
+      {/* 2. INPUT EMAIL (Muncul di dua-duanya) */}
+      <div className="mb-4">
+        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Alamat Email</label>
+        <input
+          type="email"
+          placeholder="contoh@email.com"
+          value={userData.email}
+          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+          className="w-full p-3 bg-[#333] rounded text-white text-sm outline-none border border-transparent focus:border-red-600 transition"
+        />
+      </div>
+
+      {/* 3. INPUT PASSWORD (Muncul di dua-duanya) */}
+      <div className="mb-4">
+        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Kata Sandi</label>
+        <input
+          type="password"
+          placeholder="••••••••"
+          className="w-full p-3 bg-[#333] rounded text-white text-sm outline-none border border-transparent focus:border-red-600 transition"
+        />
+      </div>
+
+      {/* 4. INPUT TANGGAL LAHIR (Cuma muncul pas Sign Up) */}
+      {!isLoginView && (
+        <div className="mb-6">
+          <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Tanggal Lahir</label>
+          <input
+            type="date"
+            value={userData.tglLahir}
+            onChange={(e) => setUserData({ ...userData, tglLahir: e.target.value })}
+            className="w-full p-3 bg-[#333] rounded text-white text-sm outline-none border border-transparent focus:border-red-600 transition uppercase"
+          />
+        </div>
+      )}
+
+      {/* TOMBOL AKSI UTAMA */}
+      <button
+        onClick={() => {
+          setIsLoggedIn(true);
+          setShowLoginForm(false);
+          // Simpan data pendaftaran terbaru ke localStorage browser kamu
+          localStorage.setItem('userTercatat', JSON.stringify(userData));
+        }}
+        className="w-full bg-red-600 py-3 rounded font-bold hover:bg-red-700 transition uppercase text-sm tracking-wider shadow-lg cursor-pointer"
+      >
+        {isLoginView ? "Masuk" : "Daftar Akun"}
+      </button>
+
+      {/* NAVIGASI PINDAH MODE DI DALAM MODAL */}
+      <p className="text-xs text-gray-500 text-center mt-4">
+        {isLoginView ? "Belum punya akun CinemaVote? " : "Sudah punya akun? "}
+        <span 
+          onClick={() => setIsLoginView(!isLoginView)}
+          className="text-white hover:underline cursor-pointer font-bold transition ml-1"
+        >
+          {isLoginView ? "Daftar sekarang" : "Login disini"}
+        </span>
+      </p>
+
+    </div>
+  </div>
+)}
 
     </nav>
   );
